@@ -34,6 +34,12 @@ const nextConfig = {
       "@libp2p/http",
       "@libp2p/http-utils",
     ],
+    // The CDR WASM is read at runtime via fs (new URL(..., import.meta.url)),
+    // which Vercel's file tracer can't detect — force-include it in the sell
+    // serverless functions so initWasm() can find cb-mpc-tdh2.wasm.
+    outputFileTracingIncludes: {
+      "/api/sell/**": ["./node_modules/@piplabs/cdr-crypto/dist/wasm/**"],
+    },
   },
   webpack: (config, { isServer, webpack }) => {
     config.resolve.alias = {

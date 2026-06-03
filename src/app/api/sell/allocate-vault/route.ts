@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { encodeAbiParameters } from "viem";
 import { z } from "zod";
-import { createServerCdrClient, ensureCdrWasm } from "@/lib/server/cdr";
+import { createServerCdrClient } from "@/lib/server/cdr";
 import {
   LICENSE_READ_CONDITION,
   LICENSE_TOKEN,
@@ -23,7 +23,7 @@ export async function POST(req: Request): Promise<Response> {
     return NextResponse.json({ error: "Invalid or missing ipId" }, { status: 400 });
   }
 
-  await ensureCdrWasm();
+  // Allocate is a pure on-chain tx — no CDR WASM needed (only encrypt-store is).
   const { client, account } = createServerCdrClient();
 
   const writeConditionData = encodeAbiParameters(
