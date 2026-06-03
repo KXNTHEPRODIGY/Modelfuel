@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "skills": {
+    "cdr": {
+      "source": "jacob-tucker/cdr-skill",
+      "sourceType": "github",
+      "skillPath": "skills/cdr/SKILL.md",
+      "computedHash": "1a75fb754d09a8158b9a302cd87d38221e5c8866e4a7ed0886ed6d5092d93537"
+    }
+  }
+}
