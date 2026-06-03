@@ -341,7 +341,11 @@ export default function SellPage() {
           />
         </div>
 
-        <Button type="submit" disabled={running}>
+        <Button
+          type="submit"
+          disabled={running}
+          className="bg-[#FF6B1A] text-[#0A0A0A] hover:bg-[#FF6B1A]/90"
+        >
           {running ? "Publishing…" : "Publish listing"}
         </Button>
       </form>
