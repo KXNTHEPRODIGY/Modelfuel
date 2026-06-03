@@ -6,8 +6,18 @@ import { storyAeneid } from "@/lib/chains";
 
 const RPC_URL =
   process.env.NEXT_PUBLIC_STORY_RPC_URL ?? "https://aeneid.storyrpc.io";
-const API_URL =
-  process.env.NEXT_PUBLIC_STORY_API_URL ?? "http://172.192.41.96:1317";
+
+/**
+ * The Story-API is plain HTTP; calling it directly from an HTTPS page is
+ * blocked as mixed content. Route its read-only REST calls through a
+ * same-origin HTTPS proxy (/api/story-api/*) instead.
+ */
+function getApiUrl(): string {
+  if (typeof window !== "undefined") {
+    return `${window.location.origin}/api/story-api`;
+  }
+  return process.env.NEXT_PUBLIC_STORY_API_URL ?? "http://172.192.41.96:1317";
+}
 
 let wasmReady: Promise<unknown> | undefined;
 
@@ -31,6 +41,6 @@ export function createCdrClient(walletClient: WalletClient): CDRClient {
     network: "testnet",
     publicClient,
     walletClient,
-    apiUrl: API_URL,
+    apiUrl: getApiUrl(),
   });
 }
