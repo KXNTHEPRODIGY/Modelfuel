@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { ipfsGatewayUrl } from "@/lib/listings";
 import { Button } from "@/components/ui/button";
 
 const MAX_ROWS = 200;
@@ -37,20 +36,23 @@ export function SamplePreview({ cid }: { cid: string }) {
     try {
       const controller = new AbortController();
       const timeout = setTimeout(() => controller.abort(), 20_000);
-      const res = await fetch(ipfsGatewayUrl(cid), { signal: controller.signal });
+      // `cid` is a Supabase storage path; get a short-lived signed URL for it.
+      const signRes = await fetch("/api/storage/signed-url", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({ path: cid }),
+        signal: controller.signal,
+      });
+      if (!signRes.ok) throw new Error("Could not resolve the sample URL.");
+      const { signedUrl } = (await signRes.json()) as { signedUrl: string };
+      const res = await fetch(signedUrl, { signal: controller.signal });
       clearTimeout(timeout);
-      if (!res.ok) throw new Error(`Gateway returned ${res.status}`);
+      if (!res.ok) throw new Error(`Sample fetch returned ${res.status}`);
       const raw = await res.text();
       setParsed(parsePreview(raw));
       setState("ready");
     } catch (e) {
-      setError(
-        e instanceof Error
-          ? e.message === "The operation was aborted."
-            ? "Timed out — the sample may not be available on the gateway yet."
-            : e.message
-          : "Failed to load sample",
-      );
+      setError(e instanceof Error ? e.message : "Failed to load sample");
       setState("error");
     }
   }

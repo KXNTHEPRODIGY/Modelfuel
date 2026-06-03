@@ -4,8 +4,9 @@ import { createSupabaseServerClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
 
-// Paths are the `cdr/<uuid>.bin` objects produced by the sell flow.
-const schema = z.object({ path: z.string().regex(/^cdr\/[\w.-]+$/) });
+// Paths are the `cdr/<uuid>.bin` (ciphertext) or `samples/<uuid>.bin` (public
+// preview) objects produced by the sell flow.
+const schema = z.object({ path: z.string().regex(/^(?:cdr|samples)\/[\w.-]+$/) });
 
 /**
  * Returns a short-lived signed URL for a ciphertext object in the private
