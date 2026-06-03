@@ -1,5 +1,5 @@
 <div align="center">
-  <img https://x.com/emmanuel_c92998/photo />
+  <img https://pbs.twimg.com/profile_images/2062154523355844608/3UWvZacZ_400x400.jpg />
   <h1>Modelfuel</h1>
   <p><strong>The encrypted marketplace for AI-grade data.</strong></p>
   <p>Sell your dataset. Keep your IP. Settle on-chain.</p>
