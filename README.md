@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/adf34686-4d4d-4bd9-b742-f199c7cb9bf4" />
+  <img src="https://github.com/user-attachments/assets/c6656ebf-4bcd-4faf-8c06-f0da14262043" />
   <h1>Modelfuel</h1>
   <p><strong>The encrypted marketplace for AI-grade data.</strong></p>
   <p>Sell your dataset. Keep your IP. Settle on-chain.</p>
