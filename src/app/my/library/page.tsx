@@ -97,7 +97,19 @@ export default function LibraryPage() {
                   )}
                 </p>
               </div>
-              <DownloadButton purchase={purchase} listing={listing} />
+              <div className="flex shrink-0 flex-col items-end gap-2">
+                {purchase.tx_hash && (
+                  <a
+                    href={`/receipt/${purchase.tx_hash}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium text-muted-foreground hover:text-foreground"
+                  >
+                    View receipt ↗
+                  </a>
+                )}
+                <DownloadButton purchase={purchase} listing={listing} />
+              </div>
             </div>
           ))
         )}

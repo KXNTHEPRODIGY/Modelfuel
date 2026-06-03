@@ -59,3 +59,8 @@ export function txExplorerUrl(hash: string): string {
 export function addressExplorerUrl(address: string): string {
   return `https://aeneid.storyscan.io/address/${address}`;
 }
+
+/** Story IP Asset explorer (the IP portal, not the raw block explorer). */
+export function ipAssetExplorerUrl(ipId: string): string {
+  return `https://aeneid.explorer.story.foundation/ipa/${ipId}`;
+}
